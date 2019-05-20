@@ -2,6 +2,8 @@
 
 > Abstraction layer for POSIX sockets in modern C++. Simple and reliable.
 
+## :construction: Disclaimer: work in progress !
+
 ## :rocket: Installation
 
 1. Download or clone this repository.

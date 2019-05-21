@@ -2,7 +2,7 @@
 
 > Abstraction layer for POSIX sockets in modern C++. Simple and reliable.
 
-## :construction: Disclaimer: work in progress !
+### :construction: Disclaimer: work in progress !
 
 ## :rocket: Installation
 
@@ -38,9 +38,19 @@ todo
 
 todo
 
-## :sparkles: Source
+## :sparkles: Sources
 
 https://en.wikipedia.org/wiki/Berkeley_sockets
+
+https://manpages.ubuntu.com/manpages/disco/man7/sys_socket.h.7posix.html
+
+https://manpages.ubuntu.com/manpages/disco/man7/netinet_in.h.7posix.html
+
+https://manpages.ubuntu.com/manpages/disco/man7/sys_un.h.7posix.html
+
+https://manpages.ubuntu.com/manpages/disco/man7/arpa_inet.h.7posix.html
+
+https://manpages.ubuntu.com/manpages/disco/man7/netdb.h.7posix.html
 
 ## :penguin: Authors
 

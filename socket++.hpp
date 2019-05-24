@@ -188,6 +188,19 @@ namespace new_socket {
 					void set_address(const type& _data) { data = _data; }
 		};
 
+		/// IPv4 address.
+		class ipv4_address : public ip_address<std::bitset<32>> {
+			// attributes
+			public:
+				constexpr static std::bitset<32> localhost = { INADDR_ANY };
+				constexpr static std::bitset<32> broadcast = { INADDR_BROADCAST };
+			// members
+			public:
+				std::ostream& operator<<(std::ostream& stream) const {
+					stream << data << std::string(":") << std::to_string(port);
+					return stream;
+				}
+		};
 
 	}
 

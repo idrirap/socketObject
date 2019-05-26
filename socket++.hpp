@@ -54,7 +54,14 @@ namespace new_socket {
 
 		/// Abstract class representing a generic socket.
 		class socket {
-			virtual ~socket() = 0;
+			public:
+				/// Destructor.
+				virtual ~socket() noexcept = 0;
+				/// ...
+				virtual void receive();
+				virtual void send();
+				std::ostream& operator<<(std::ostream& stream) const;
+				std::istream& operator>>(std::istream& stream);
 		};
 	}
 

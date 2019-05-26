@@ -209,8 +209,49 @@ namespace new_socket {
 				}
 		};
 
+		/// IPv6 address.
+		class ipv6_address : public ip_address<std::bitset<128>> {
+			// attributes
+			public:
+				/// Contains the wildcard IPv6 address.
+				inline static std::bitset<128> wildcard = std::bitset<128>(std::string(reinterpret_cast<const char*>(in6addr_any.s6_addr))),
+				/// Contain the loopback IPv6 address.
+					loopback = std::bitset<128>(std::string(reinterpret_cast<const char*>(in6addr_loopback.s6_addr)));
+			private:
+				/// Multicast hop limit.
+				unsigned int multicast_hop_limit,
+				/// Unicast hop limit.
+					unicast_hop_limit,
+				/// IPv6 traffic class and flow information.
+					flow_info,
+				/// Set of interfaces for a scope.
+					scope_id;
+				/// Interface to use for outgoing multicast packets.
+				std::bitset<128> multicast_interface,
+				/// Multicast packets are delivered back to the local application.
+					multicast_loopback;
+				/// Restrict AF_INET6 socket to IPv6 communications only.
+				bool ipv6_only;
+			// members
+			public:
+				bool join_multicast_group() { return false; }
+				bool leave_multicast_group() { return false; }
+				bool is_loopback() { return false; }
+				bool is_multicast() { return false; }
+				bool is_unicast_link_local() { return false; }
+				bool is_unicast_site_local() { return false; }
+				bool is_ipv4_mapped() { return false; }
+				bool is_ipv4_compatible() { return !ipv6_only; }
+				bool is_multicast_node_local() { return false; }
+				bool is_multicast_link_local() { return false; }
+				bool is_multicast_site_local() { return false; }
+				bool is_multicast_organisation_local() { return false; }
+				bool is_multicast_global() { return false; }
+				void set_muticast_hop_limit(unsigned int hop_limit) { multicast_hop_limit = hop_limit; }
+		};
 	}
 
 	namespace _unix {} // name unix already taken
+
 	namespace unspecified {}
 }

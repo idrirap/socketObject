@@ -43,11 +43,10 @@ namespace new_socket {
 			// members
 			public:
 				/// Destructor.
-				virtual ~address() = 0;
+				virtual ~address() noexcept = 0;
 				/// Returns the `domain` of the `address`.
 				domain get_domain() const { return _domain; }
 				/// Stream insertion operator.
-				/// Formats the instance for the given output stream.
 				/// Must be redefined in instantiable subclasses.
 				virtual std::ostream& operator<<(std::ostream& stream) const = 0;
 		};
@@ -84,16 +83,20 @@ namespace new_socket {
 			public:
 				const static domain _domain = domain::INET;
 			protected:
+				/// IP port.
 				unsigned int port;
+				/// Actual IP address as a `bitset<>`.
 				type data;
 			// members
 			public:
 				// pure virtual class specifier
 					/// Desctrutor.
-					virtual ~ip_address() = 0;
+					virtual ~ip_address() noexcept = 0;
 				// rule of five
+					/// Default constructor.
+					ip_address() = delete;
 					/// Constructor.
-					ip_address() : port(0), address(type()) {}
+					ip_address(unsigned int _port, const type& _data) : port(_port), data(_data) {}
 					/// Copy constructor.
 					ip_address(const ip_address& other) : port(other.port), data(other.data) {}
 					/// Move constructor.
@@ -199,10 +202,14 @@ namespace new_socket {
 		class ipv4_address : public ip_address<std::bitset<32>> {
 			// attributes
 			public:
-				constexpr static std::bitset<32> localhost = { INADDR_ANY };
-				constexpr static std::bitset<32> broadcast = { INADDR_BROADCAST };
+				/// IPv4 local host address.
+				constexpr static std::bitset<32> localhost = { INADDR_ANY },
+				/// IPv4 broadcast address.
+					broadcast = { INADDR_BROADCAST };
 			// members
 			public:
+				/// Stream insertion operator.
+				/// Formats the instance for the given output stream.
 				std::ostream& operator<<(std::ostream& stream) const {
 					stream << data << std::string(":") << std::to_string(port);
 					return stream;
